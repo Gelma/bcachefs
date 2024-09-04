@@ -113,6 +113,9 @@ static inline bool bch2_ptr_matches_stripe(const struct bch_stripe *s,
 	if (p.ec.block >= nr_data)
 		return false;
 
+	if (p.ptr.dev == BCH_SB_MEMBER_INVALID)
+		return true;
+
 	return __bch2_ptr_matches_stripe(&s->ptrs[p.ec.block], &p.ptr,
 					 le16_to_cpu(s->sectors));
 }
